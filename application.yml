@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/permissiondb?userUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: cloud-CarInsuranceClaims-Permission
+    cloud:
+      ###开始配置consul的服务注册
+      consul:
+        #consul服务器的主机地址
+        host: localhost
+        #consul服务器的ip地址
+        port: 8500
+        discovery:
+          #服务主机名称
+          #hostname: 127.0.0.1
+          #服务的名称
+          service-name: ${spring.application.name}
+          #是否需要注册
+          register: true
+    redis:
+      port: 6379
+      host: 192.168.80.151
+      database: 0
+      password: 123
+        #配置redis连接池
+        #配置最大连接数.设置负数是无限值
+      jedis:
+        pool:
+          max-active: 10
+          min-idle: 0
+            #设置最大等待时间ms
+          max-wait: 10
+          max-idle: 3
